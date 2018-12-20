@@ -53,7 +53,7 @@ def change_encoding(path, ext='any', codec='utf-8'):
                     file = os.path.join(root, file)
                     encode(file, codec)
     else:
-        encode(file, codec)
+        encode(path, codec)
     print('Converted!')
 
 
