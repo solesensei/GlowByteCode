@@ -11,6 +11,8 @@ You can set global variables inside, or just input it in process
 # --------- Variables ---------
 path = ''
 ext = ''
+force_encode = True
+default_codec = 'windows-1251'
 # -----------------------------
 ```
 
