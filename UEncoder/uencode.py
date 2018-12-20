@@ -19,7 +19,8 @@ def get_encoding_type(file):
 
 def encode(path, tocodec):
     fromcodec = get_encoding_type(path)
-    if fromcodec == tocodec:
+    if fromcodec == 'MacCyrillic': fromcodec = 'windows-1251' # fix error detections
+    if fromcodec == tocodec :
         print(f"Already {tocodec}: {path}")
         return
     print(f"Convert from {fromcodec} to {tocodec}: {path}")
