@@ -1,0 +1,152 @@
+% 
+% Автор: Гончаренко Дмитрий, GlowByte Consulting
+% 
+\documentclass[12pt,a4paper]{extarticle}
+\usepackage{cmap}
+\usepackage[utf8x]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[russian,english]{babel}
+\usepackage[hidelinks]{hyperref}  
+\usepackage{amsthm}
+\usepackage{listings,lstautogobble} 
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{xcolor,colortbl}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{tabularx}
+\usepackage{fullpage}
+\usepackage{fancyhdr}
+\usepackage[nottoc,numbib]{tocbibind}
+
+% -------------------------------------------------------
+
+ %----------------------------------------------------------------------------------------
+ %   INFORMATION SECTION
+ %----------------------------------------------------------------------------------------
+
+ \newcommand{\name}{Гончаренко Дмитрий Александрович} % ФИО
+ 
+ \newcommand{\ftitle}{Что сделано} % 1. Что сделано
+
+ \newcommand{\system}{SAS RTDM} % 2. Затрагиваемые ИТ системы
+
+ \newcommand{\whattest}{Что тестировано} % 3. Предмет тестирования/FAT
+
+ \newcommand{\whotest}{Гончаренко Д.А.} % 4. Участники тестирования/FAT
+
+ \newcommand{\role}{Технолог} % 4. Участники тестирования/FAT - Роль
+
+ \newcommand{\goal}{Зачем тестировано} % 5. Цель тестирования/FAT
+
+ \newcommand{\env}{SAS RTDM} % 6. Среда проведения тестирования/FAT
+
+ \newcommand{\result}{Приложение работоспособно и работает в соответствие с ожиданиями} % 7. Результат проверки тестирования/FAT
+
+
+% -------------------------------------------------------
+
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\newenvironment{textbox}[1][|X|]{
+    \vspace{1pt}
+    \centering
+    \tabularx{\textwidth}{#1}
+        \hline 
+    }
+    { 
+        \\\hline
+    \endtabularx\\
+    \vspace{4.5pt}
+}
+
+
+\begin{document}
+\normalsize
+\selectlanguage{russian}
+\thispagestyle{empty}
+
+    \setlength{\headsep}{-2cm}
+    \begin{figure}[htp]
+        \centering
+        \includegraphics[width=0.3\textwidth]{rsb}
+    \end{figure}
+    \begin{center}
+        \color{blue}{\textbf{
+            \Huge{\underline{FAT}\textbackslash UAT Report}
+        }}
+    \end{center}
+
+    \begin{textbox} \\
+        1. \ftitle \\
+    \end{textbox}
+
+    \noindent\textbf{2. Затрагиваемые ИТ системы}
+
+    \begin{textbox}
+        \system
+    \end{textbox}
+
+    \noindent\textbf{3. Предмет тестирования/FAT}
+
+    \begin{textbox}
+        \whattest
+    \end{textbox}
+
+    \noindent\textbf{4. Участники тестирования/FAT}
+
+    \begin{textbox}[|X|X|X|]
+            \textbf{Имя}    & \textbf{Подразделение} & \textbf{Роль} \\ \hline
+            \whotest        & ДРР                    & \role  
+    \end{textbox}
+
+    \noindent\textbf{5. Цель тестирования/FAT}
+    
+    \begin{textbox}
+        \goal
+    \end{textbox}
+
+    \noindent\textbf{6. Среда проведения тестирования/FAT}
+    
+    \begin{textbox}
+        \system
+    \end{textbox}
+
+    \noindent\textbf{7. Результат проверки тестирования/FAT}
+    
+    \begin{textbox}
+        \result
+    \end{textbox}
+
+    \noindent\textbf{8. Заключение по результату проверки тестирования/FAT}
+    
+    \begin{textbox}
+        \footnotesize{\emph{В процессе проведения FAT установлено, что функциональность ПО полностью соответствует предъявленным требованиям. Установку доработок в СЕРТ среду считаем возможным.}}
+    \end{textbox}
+
+    \noindent\textbf{9. Выявленные замечания по результату проверки тестирования/FAT}
+    
+    \begin{textbox}
+        
+    \end{textbox}
+
+    \noindent\textbf{10. Финальное решение по результату проверки тестирования/FAT}
+    
+    \begin{textbox}[|l|X|]
+        \textbf{Test\textbackslash FAT статус} & \textbf{Пройдено} \\ \hline
+        \textbf{Комментарий} & \\ &
+    \end{textbox}
+
+    \vspace{-7pt}
+    
+    \begin{textbox}[|l|X|p{0.2\textwidth}|]
+        Дата    & Фамилия, Имя Бизнес представителя & Подпись \\ \hline
+        \today        & \name    & 
+    \end{textbox}
+
+    \vspace{-1.5cm}
+    \hspace{12.5cm}\includegraphics[width=70pt]{sign}  
+
+
+\end{document} 
