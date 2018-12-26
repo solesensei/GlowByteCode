@@ -20,5 +20,8 @@ Script for sending and downloading files from strict firewall locations via Glow
 Tiny tool for fast recursive files encoding
 
 ## Bash Scripts
-### [dev_manage.sh](./DEVManage)
-Bash script for managing a development server in Rosbank
+### [DEVManage](./DEVManage)
+Bash scripts for managing a development server in Rosbank
+
+### [RemotePIP](./RemotePIP)
+Bash script for sending `.whl` pip packages to remote server via GlowByte Network 
