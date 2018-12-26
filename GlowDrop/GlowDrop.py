@@ -124,7 +124,7 @@ if args.s:
         print('Sending file', args.s)
         files = {'file' : open(args.s, 'rb')}
         send = requests.post(url, auth=(username, password), headers=headers, files=files)
-        print ('Sended!' if send.status_code == 200 else send.text + str(send.status_code))
+        print ('Sent!' if send.status_code == 200 else send.text + str(send.status_code))
     else:
         print('Error: No \'' + args.s + '\' file found!')
         soft_exit(1)
@@ -189,10 +189,10 @@ if args.email:
         server.ehlo()
         server.login(emailme, epass)
         server.sendmail(emailme, emailto, msg.as_string())
+        print('Sent!')
     except:
         print('Email auth error: go to https://stackabuse.com/how-to-send-emails-with-gmail-using-python/')
     
-    print('Sent!')
     server.quit()
 
 
