@@ -60,7 +60,7 @@ def create_template_conf(config):
 def get_config(config):
     if not os.path.exists(config):
         print('No config file', config, 'found!')
-        r = input('Create template config [y|n]')
+        r = input('Create template config [y|n] ')
         if r == 'y':
             create_template_conf(config)
         soft_exit(1)

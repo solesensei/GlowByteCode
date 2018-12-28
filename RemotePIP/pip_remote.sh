@@ -1,4 +1,10 @@
-#!/bin/sh
+#!/bin/bash
+
+# stop on error
+set -e
+
+# glowdrop path
+glowdrop='python3 ../../GlowDrop/GlowDrop.py'
 
 if  [ $# -eq 1 ]; then
     package=$1
@@ -7,18 +13,14 @@ else
     exit 0
 fi
 
-shopt -s expand_aliases
-source ~/.bashrc
-
-cd ~
-DIRECTORY="./pip"
+DIRECTORY="pip"
 
 if [ ! -d "$DIRECTORY" ]; then
-    echo "Creating pip dir"
-    mkdir pip
+    echo "Creating $DIRECTORY dir"
+    mkdir $DIRECTORY
 fi
 
-cd pip
+cd $DIRECTORY
 python3 -m pip download $package
 
 FILE=`ls ${package}*.whl`
@@ -27,6 +29,6 @@ ls ${package}*.whl
 mv $FILE ${FILE}.txt
 ls ${package}*.txt
 echo "Sending with glowdrop: ${FILE}.txt"
-glowdrop -s ${FILE}.txt -e -c ~/config.yaml
+$glowdrop -s ${FILE}.txt -e -c ~/config.yaml
 echo "Rename back"
 mv ${FILE}.txt $FILE
