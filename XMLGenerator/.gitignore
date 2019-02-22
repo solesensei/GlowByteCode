@@ -1,4 +1,3 @@
-
-*.xml
+apps/
 *.txt
 __pycache__
