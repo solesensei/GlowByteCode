@@ -1,17 +1,11 @@
 <Message xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:sccusreq="http://rosbank.ru/definitions/ScoreCustomer/Request" xmlns:rtdm="http://rosbank.ru/types/RTDM" xmlns:comm="http://rb.ru/types/DL/Common">
    <Application>
-      <Ext_Request_ID>1-9JUB7E</Ext_Request_ID>
-      <App_ID>1-9JUB7E</App_ID>
-      <Request_Type>Light_Signal</Request_Type>
-	  <App_DT>2018-04-07T03:40:35Z</App_DT>
-      <Product>
-         <Macroproduct>SERV</Macroproduct>
-      </Product>
-      <Applicant>
-         <Applicant_ID>SERV_TEST_MEMBER_TYPE_LE3</Applicant_ID>
-         <Client_ID>1-5G148Y</Client_ID>
-         <INN>0123456789</INN>
-      </Applicant>
+        <App_ID>1-4J6FJM</App_ID>
+        <Client_ID>2-S0L3-12</Client_ID>
+        <Request_Type>SGCheck</Request_Type>
+        <INN>0123456789</INN>
+        <Service_Extra_Info>Текст до 4000 байт</Service_Extra_Info>
+        <App_DT>2022-11-13T09:54:22Z</App_DT>
    </Application>
    <MessageInfo>
       <MessageID>1aaed014-0148-4bb4-9719-c5455e2f30d5</MessageID>
