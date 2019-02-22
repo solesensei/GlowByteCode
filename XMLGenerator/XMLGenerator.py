@@ -8,9 +8,11 @@ import xml.etree.ElementTree as ET
 import random as rand
 from datetime import datetime
 from os import path, mkdir
+from modules.clean_base import start_cleaning
+from modules.inn import get_company_inn
 
 # --------- pattern file ----------- #
-file = 'pattern_new.xml'
+file = 'pattern.xml'
 # ------------ variables ----------- #
 app_id = 'SERV-TEST-NEW-XSD'
 client_id = 'test_client_id'
@@ -85,6 +87,8 @@ def main():
         print('No pattern file exist!')
         print('Create one app by hands: pattern.xml')
         exit(1)
+    start_cleaning('./database/export-base.csv')
+    inn_list = get_company_inn('./database/export-base.csv')
     with open(file, 'r') as f:
         header = f.readline()
     generator(header)
