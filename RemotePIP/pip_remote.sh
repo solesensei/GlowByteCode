@@ -3,8 +3,12 @@
 # stop on error
 set -e
 
+
+# change dir
+cd /mnt/c/prj/GlowByteCode/RemotePIP/
+
 # glowdrop path
-glowdrop='python3 ../../GlowDrop/GlowDrop.py'
+glowdrop='python3 /mnt/c/prj/GlowByteCode/GlowDrop/GlowDrop.py'
 
 if  [ $# -eq 1 ]; then
     package=$1
