@@ -2,12 +2,14 @@
 # Tiny tool for fast recursive files encoding 
 # by Sole
 import os
+import html
 from chardet import detect
 
 # --------- Variables ---------
 path = ''
 ext = ''
 force_encode = False
+unescape = True
 default_codec = 'windows-1251'
 # -----------------------------
 
@@ -59,6 +61,8 @@ def encode(path, tocodec):
     try:
         with open(path, 'r', encoding=fromcodec) as f, open(tmp_file, 'w', encoding=tocodec) as e:
             text = f.read()
+            if unescape:
+                text = html.unescape(text)
             e.write(text)
         os.remove(path)
         os.rename(tmp_file, path) 
