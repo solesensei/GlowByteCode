@@ -1,0 +1,5 @@
+__pycache__/
+xml/
+*.yaml
+*.txt
+!requirements.txt
