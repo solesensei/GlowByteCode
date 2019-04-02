@@ -7,7 +7,7 @@ from os.path import exists
 def get_company_inn(datapath, delimiter=';', quotechar='"'):
     """
     Returns 'INN' list from database
-    ----
+    --
     datapath : str - path to database with 'INN' column
     """ 
     if not exists(2):

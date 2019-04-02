@@ -11,6 +11,8 @@ from os import path, mkdir
 from modules.clean_base import start_cleaning
 from modules.inn import get_company_inn
 
+__ver__ = 'v1.1' 
+
 # -------- database file ----------- #
 database = './database/export-base.csv'
 # --------- pattern file ----------- #
@@ -21,40 +23,48 @@ client_id = 'test_client_id'
 request_type = 'SGCheck'
 inn_size = [10, 12]
 app_dt = '2018-04-07T03:40:35Z'
-service_extra_info = 'Generated with XMLGenerator.py v1.1' 
+service_extra_info = 'Generated with XMLGenerator.py ' + __ver__
 # ----------- parametrs ----------- #
 apps_number = 100
 start_from = 1
 
 def create_num_size(size):
+    """ Creating number with random `size` of random digits 
+        --
+        size : list - list of sizes, get one randomly
+    """
     rand.seed(datetime.now())
-    inn = ''
+    num = ''
     size = rand.choice(size) 
     for _ in range(size):
         a = rand.randint(0,9)
-        inn += str(a)
-    return inn
+        num += str(a)
+    return num
 
 
 def get_app_name(i):
+    """ Get concatenation of `app_id` and `i` """
     return app_id + '-' + str(i)
 
 
 def get_header(file):
+    """ Get first line of the `file` """
     with open(file, 'r') as f:
         return f.readline()
 
 
 def add_header(header, filename, i):
+    """ Insert `header` to top of the `filename` """
     with open(filename, 'r+') as f:
             content = f.readlines()
             content[0] = header
             f.seek(0,0)
-            f.write('<!-- Generated with XMLGenerator.py v1.0 | ' + get_app_name(i) + ' -->\n')
+            f.write(f'<!-- Generated with XMLGenerator.py {__ver__} | {get_app_name(i)} -->\n')
             f.writelines(content)
 
 
 def modify(f, n, pattern, inn):
+    """ Changing pattern to create new xml """
     tree = ET.parse(pattern)
     root = tree.getroot()
     for child in root.findall('Application'):
@@ -75,6 +85,7 @@ def modify(f, n, pattern, inn):
 
 
 def start_generation(pattern, data):
+    """ Input function where generation begins """
     print('XML Generation starts!')
     print('Number of apps:', apps_number)
     print('Starts from:', start_from)

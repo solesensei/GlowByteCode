@@ -7,8 +7,8 @@ from os.path import exists
 def start_cleaning(datapath, delimiter=';', quotechar='"'):
     """
         Returns filename of clean version of input base
-
-        base : str - path to base.csv
+        --
+        datapath : str - path to base.csv
     """
     if not exists(datapath):
         print(f"Base path: {datapath} doesn't exists!")
