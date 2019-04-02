@@ -3,36 +3,31 @@
 # stop on error
 set -e
 
-
-# change dir
-cd /mnt/c/prj/GlowByteCode/RemotePIP/
-
 # glowdrop path
-glowdrop='python3 /mnt/c/prj/GlowByteCode/GlowDrop/GlowDrop.py'
+glowdrop="python3 ../GlowDrop/GlowDrop.py"
 
-if  [ $# -eq 1 ]; then
-    package=$1
-else
+echo "Check your config.yaml file"
+$glowdrop --make_conf
+
+if  [ $# -lt 1 ]; then
     echo "No argument specified"
     exit 0
 fi
 
 DIRECTORY="pip"
+PACKAGE="$1"
+PACKDIR="$DIRECTORY/$PACKAGE"
 
-if [ ! -d "$DIRECTORY" ]; then
-    echo "Creating $DIRECTORY dir"
-    mkdir $DIRECTORY
-fi
+echo "Creating $PACKDIR dir"
+mkdir -p $PACKDIR
 
-cd $DIRECTORY
-python3 -m pip download $package
+python3 -m pip download $PACKAGE -d $PACKDIR
 
-FILE=`ls ${package}*.whl`
-echo "Converting to txt"
-ls ${package}*.whl
-mv $FILE ${FILE}.txt
-ls ${package}*.txt
-echo "Sending with glowdrop: ${FILE}.txt"
-$glowdrop -s ${FILE}.txt -e -c ~/config.yaml
-echo "Rename back"
-mv ${FILE}.txt $FILE
+FILE=`ls ${PACKDIR}/*.whl`
+echo "Converting .whl to .txt..."
+for f in ${PACKDIR}/*whl; do mv "$f" ${PACKDIR}/"$(basename "$f" .whl)".txt; done
+echo "Zipping: ${PACKDIR}"
+zip -r ${DIRECTORY}/${PACKAGE}.zip ${PACKDIR}
+echo "Sending with glowdrop: ${PACKAGE}.zip"
+$glowdrop -s ${DIRECTORY}/${PACKAGE}.zip -e -c config.yaml
+echo "RemotePIP completed!"
