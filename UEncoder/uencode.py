@@ -6,49 +6,59 @@ import html
 from chardet import detect
 
 # --------- Variables ---------
-path = ''
-ext = ''
-force_encode = False
-unescape = True
-default_codec = 'windows-1251'
+__ue_path__ = ''
+__ue_ext__ = ''
 # -----------------------------
+__start_log_line__ = '-------------- start processing --------------'
 
-start_log_line = '-------------- start processing --------------'
 
 def to_log(*text):
+    """ Logging `text` to `log.txt` file """
     print(*text)
     with open('log.txt', 'a') as log:
         print(*text, file=log)
 
+
 def print_log():
+    """ Printing `log.txt` """
     print('Errors log:')
     with open('log.txt', 'r') as log:
         text = log.readlines()
-    last_count = sum(1 for line in text if line.strip() == start_log_line)
+    last_count = sum(1 for line in text if line.strip() == __start_log_line__)
     count = 0
     for line in text:
         line = line.strip()
-        if line == start_log_line:
+        if line == __start_log_line__:
             count += 1
         if count >= last_count:
             print(line)
         
 
 def get_encoding_type(file):
+    """ Detect `file` encoding codec """ 
     with open(file, 'rb') as f:
         rawdata = f.read()
     return detect(rawdata)['encoding']
 
-def encode(path, tocodec):
+
+def encode(path, tocodec, default_codec='windows-1251', unescape=False, force_encode=False):
+    """ Change encoding codec from source to target
+        --
+        path : str - path to file \n
+        tocodec : str - target codec to encode \n
+        default_codec : str - try this codec as source if error detection
+        unescape : bool - fix ascii html codes
+        force_encode : bool - force encode if input codec matches output and if possible detection error 
+    """
     fromcodec = get_encoding_type(path)
     
     if fromcodec == tocodec:
         print(f"Already {tocodec}: {path}")
-        if not force_encode:
+        if not force_encode and not unescape:
             return
             
     # fix error detections (RU region)
-    if fromcodec not in ('windows-1251', 'ascii') and fromcodec.lower().find('utf') == -1: 
+    if fromcodec not in ('windows-1251', 'ascii') and fromcodec.lower().find('utf') == -1:
         to_log('Possible Detect dismiss: ' + fromcodec + ' in ' +  path)
         if not force_encode:
             to_log('Try default:', default_codec)
@@ -70,8 +80,15 @@ def encode(path, tocodec):
         to_log(f'[{fromcodec}] → [{tocodec}] - Decoding Error: {path}')
     except UnicodeEncodeError:
         to_log(f'[{fromcodec}] → [{tocodec}] - Encoding Error: {path}')
+    print(f'Converted!')
+
 
 def change_encoding(path, ext='any', codec='utf-8'):
+    """ Recursively encoding files in directory 
+        --
+        path : str - directory path to process \n
+        ext : str - file extension to process, *any* for insensitivity to file extensions
+    """
     if not os.path.exists(path):
         print(f'No {path} found!')
         exit(0)
@@ -91,20 +108,28 @@ def change_encoding(path, ext='any', codec='utf-8'):
     print('Converted!')
 
 
-to_log(start_log_line)
+def main():
+    path = __ue_path__
+    if not path:
+        path = input('Enter path for directory: ')
 
-if not path:
-    path = input('Enter path for directory: ')
+    ext = __ue_ext__
+    if not ext:
+        ext = input('Enter file extension: ')
+        if ext == 'any' or ext == 'all':
+            ext = 'any'
+        elif ext[0] != '.':
+            ext = '.' + ext
+    
+    # Loging start line
+    to_log(__start_log_line__)
 
-if not ext:
-    ext = input('Enter file extension: ')
-    if ext == 'any' or ext == 'all':
-        ext = 'any'
-    elif ext[0] != '.':
-        ext = '.' + ext
+    # Change Encoding
+    change_encoding(path, ext)
 
-# Change Encoding
-change_encoding(path, ext)
+    # Print Errors
+    print_log()
 
-# Print Errors
-print_log()
+
+if __name__ == "__main__":
+    main()
