@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # dfs_manage.sh (rc)
 # 

@@ -1,0 +1,68 @@
+#!/bin/bash
+#    
+# Look Mule Logs v1.0 (name file using as autocomplete for dev_manage too)
+# 
+# GlowByte, v1.0, 03.2019
+# 
+
+# Parsing args
+serv=''
+flg_after=0
+before_=""
+_after=""
+for arg in "$@"
+do
+    if [ "$arg" = "disp" ] || [ "$arg" = "out" ]; then
+        flg_after=$(($flg_after + 1))
+        serv="$arg"
+        continue
+    fi
+    if [ $flg_after -eq 0 ]; then
+        before_="$before_ $arg"
+    else
+        _after="$_after $arg"
+    fi
+done
+if [ $flg_after -gt 1 ]; then
+    echo "------------------------------------------"
+    echo "ERROR: several 'serv' arguments specified!"
+    echo "------------------------------------------"
+    exit 1
+fi
+
+# Look log
+case $serv in
+disp)
+    echo "--------------------------------------------------------------------------"
+    if [ ! -z "$before_" ]; then
+        echo "INFO COMMAND: $before_ /sas/mule-standalone/logs/RSBDispatcher.log $_after"
+        echo "--------------------------------------------------------------------------"
+        ${before_} /sas/mule-standalone/logs/RSBDispatcher.log ${_after}
+    else
+        tac /sas/mule-standalone/logs/RSBDispatcher.log | less
+    fi
+    ;;
+out)
+    echo "--------------------------------------------------------------------------"
+    if [ ! -z "$before_" ]; then
+        echo "$before_ /sas/mule-standalone/logs/RSBOuterServices.log $_after"
+        echo "--------------------------------------------------------------------------"
+        ${before_} /sas/mule-standalone/logs/RSBOuterServices.log ${_after}
+    else
+        tac /sas/mule-standalone/logs/RSBOuterServices.log | less
+    fi
+    ;;
+*)
+    echo "----------------------- INFO -----------------------"
+    echo "Look Mule Logs v1.0"
+    echo "----------------------------------------------------"
+    echo "Usage ./mule [cmd] out|disp [cmd]"
+    echo
+    echo "out       - look backward RSBOuterServices log"
+    echo "disp      - look backward RSBDispatcher log"
+    echo "cmd       - commands before or after log file"
+    echo "----------------------------------------------------"
+
+    ;;
+esac
+

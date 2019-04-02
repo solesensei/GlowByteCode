@@ -1,0 +1,6 @@
+#!/bin/bash
+#
+# GlowByte, v1.0, 03.2019
+# 
+
+tac /sas/sasconfig/Lev1/Web/Logs/SASServer7_1/SASDecisionServicesEngine6.4.log | less

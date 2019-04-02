@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # dev_manage.sh (rm)
 # 
@@ -6,9 +6,8 @@
 # 
 # Usage: bash dev_manage.sh [mule|sas|mq|fed|dev] [stop|start|status|restart]
 # 
-# GlowByte, v2.0, 10.2018
+# GlowByte, v2.0, 03.2019
 #
-
 
 # Print help
 if  [ $# -eq 0 ] || [ $1 == '-h' ] || [ $1 == "-help" ] || [ $1 == "--help" ]; then
@@ -20,7 +19,7 @@ if  [ $# -eq 0 ] || [ $1 == '-h' ] || [ $1 == "-help" ] || [ $1 == "--help" ]; t
     echo "SYSTEM      - mule | sas | mq | fed | dev     "
     echo "              if SYSTEM not specified - dev   "
     echo "SUB         - subsystem for SAS management    "
-    echo "            - if SUB not specified - all SAS  "
+    echo "            - if SUB not specified - all SAS  " # TODO: add subsystems for sas
     echo "NO          - sas or fed server number        "
     echo "ACTION      - stop | start | status | restart "
     echo "----------------------------------------------"
@@ -36,7 +35,7 @@ if [ $# -lt 2 ]; then
 elif [ $# -eq 2 ]; then
     sys=$1
     arg=$2
-elif [ $# -eq 3]; then
+elif [ $# -eq 3 ]; then
     sys=$1
     sys_n=$2
     arg=$3
