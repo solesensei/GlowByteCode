@@ -10,6 +10,9 @@ Parsing FMS expired passports and computing delta with previous version
 ### [FATeX](./FATeX)
 FAT and UAT automatic pdf creator with python and latex library
 
+### [CISParser](./CISParser)
+SAS RTDM Strategy parser (stored in SAS Decision Services) to human-readable source code.
+
 ### [XMLGenerator.py](./XMLGenerator)
 Tiny tool for generating xml from template
 
