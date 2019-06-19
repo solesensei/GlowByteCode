@@ -24,7 +24,7 @@ Tiny tool for fast recursive files encoding
 
 ## Bash Scripts
 ### [DEVManage](./DEVManage)
-Bash scripts for managing a development server in Rosbank
+Bash scripts for managing a development server (sas, mule, fed, activemq)
 
 ### [RemotePIP](./RemotePIP)
 Bash script for sending `.whl` pip packages to remote server via GlowByte Network 
