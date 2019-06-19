@@ -13,6 +13,7 @@
 SAS="/opt/sas"
 ACTIVEMQ="/opt/sas/apache-activemq-*"
 MULE="/opt/sas/mule-standalone"
+FED="4.2"
 
 # Print help
 if  [ $# -eq 0 ] || [ $1 == '-h' ] || [ $1 == "-help" ] || [ $1 == "--help" ]; then
@@ -146,7 +147,7 @@ if [ "$sys" = "dev" ] || [ "$sys" = "fed" ]; then
     echo "-------------------- INFO --------------------"
     echo "              FED Servers ${arg}              "
     echo "----------------------------------------------"
-    ${SAS}/sashome/SASFederationServer/4.1/fedserver/bin/dfsadmin ${arg}
+    ${SAS}/sashome/SASFederationServer/${FED}/fedserver/bin/dfsadmin ${arg}
 fi
 if [ "$sys" = "dev" ] || [ "$sys" = "mule" ]; then
     echo "-------------------- INFO --------------------"
