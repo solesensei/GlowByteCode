@@ -2,7 +2,6 @@
 
 Repository of my scripts and projects written while working in [GlowByte Company](http://gbconsulting.ru/en/).
 
-Author: Dmitry Goncharenko, GlowByte
 ## Python Scripts
 ### [FMSDelta.py](./FMSDelta)
 Parsing FMS expired passports and computing delta with previous version 
