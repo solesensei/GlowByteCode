@@ -9,6 +9,11 @@
 # GlowByte, v2.1, 06.2019
 #
 
+
+SAS="/opt/sas"
+ACTIVEMQ="/opt/sas/apache-activemq-*"
+MULE="/opt/sas/mule-standalone"
+
 # Print help
 if  [ $# -eq 0 ] || [ $1 == '-h' ] || [ $1 == "-help" ] || [ $1 == "--help" ]; then
     echo
@@ -85,15 +90,15 @@ if [ "$arg" == "start" ] || [ "$arg" == "stop" ] || [ "$arg" == "restart" ] || [
             1|2)
                 sys_n=""
                 sysname="ALL SAS SERVERS"
-                saspath=/sas/sasconfig/Lev1/sas.servers
+                saspath=${SAS}/sasconfig/Lev1/sas.servers
             ;;
             6)
                 sysname="SAS Server 6 (CI Studio)"
-                saspath=/sas/sasconfig/Lev1/Web/WebAppServer/SASServer6_1/bin/tcruntime-ctl.sh
+                saspath=${SAS}/sasconfig/Lev1/Web/WebAppServer/SASServer6_1/bin/tcruntime-ctl.sh
             ;;
             7)
                 sysname="SAS Server 7 (Design & Engine Servers)"
-                saspath=/sas/sasconfig/Lev1/Web/WebAppServer/SASServer6_1/bin/tcruntime-ctl.sh
+                saspath=${SAS}/sasconfig/Lev1/Web/WebAppServer/SASServer6_1/bin/tcruntime-ctl.sh
             ;;
             12|13)
                 echo "WARNING: <anage option for SAS Server $sys_n is in developing"
@@ -129,7 +134,7 @@ if [ "$sys" = "dev" ] || [ "$sys" = "sas" ]; then
         echo "-------------------- INFO --------------------"
         echo "               ALL SAS SERVERS ${arg}         "
         echo "----------------------------------------------"
-        /sas/sasconfig/Lev1/sas.servers ${arg}
+        ${SAS}/sasconfig/Lev1/sas.servers ${arg}
     else
         echo "-------------------- INFO --------------------"
         echo "               ${sysname} ${arg}              "
@@ -141,20 +146,20 @@ if [ "$sys" = "dev" ] || [ "$sys" = "fed" ]; then
     echo "-------------------- INFO --------------------"
     echo "              FED Servers ${arg}              "
     echo "----------------------------------------------"
-    /sas/sashome/SASFederationServer/4.1/fedserver/bin/dfsadmin ${arg}
+    ${SAS}/sashome/SASFederationServer/4.1/fedserver/bin/dfsadmin ${arg}
 fi
 if [ "$sys" = "dev" ] || [ "$sys" = "mule" ]; then
-  echo "-------------------- INFO --------------------"
-echo "                  Mule ${arg}                 "
-echo "----------------------------------------------"
-/sas/mule-standalone/bin/mule ${arg}
+    echo "-------------------- INFO --------------------"
+    echo "                  Mule ${arg}                 "
+    echo "----------------------------------------------"
+    ${MULE}/bin/mule ${arg}
 fi
 
 if [ "$sys" = "dev" ] || [ "$sys" = "mq" ]; then
     echo "-------------------- INFO --------------------"
     echo "                ActiveMQ ${arg}               "
     echo "----------------------------------------------"
-    /sas/apache-activemq-5.15.2/bin/activemq ${arg}
+    ${ACTIVEMQ}/bin/activemq ${arg}
 fi
 
 timer=$(( $SECONDS - time_start ))
